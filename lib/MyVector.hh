@@ -186,6 +186,18 @@ public:
     insert(this->curr, elem);
   }
 
+  void pop_front() {
+    if(this->curr == 0) {
+      throw std::out_of_range("MyVector::pop_back(): Vector is empty!");
+    }
+
+    for(size_t i = 0; i < curr - 1; i++) {
+      elems[i] = std::move(elems[i + 1]);
+    }
+
+    curr--;
+  }
+
   void pop_back() {
     if(this->curr == 0) {
       throw std::out_of_range("MyVector::pop_back(): Vector is empty!");
