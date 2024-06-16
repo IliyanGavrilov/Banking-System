@@ -1,5 +1,6 @@
 #include "ID.hh"
 #include <cstring>
+#include "../lib/MyString.hh"
 
 ID::ID(const MyString& str) {
   setEGN(str);
@@ -11,7 +12,7 @@ const MyString &ID::getEGN() const {
 
 void ID::setEGN(const MyString &str) {
   validateEGN(str);
-  region = getRegion(stringToInt(str, EGN_LEN - 4, EGN_LEN));
+  region = getRegion(string_to_int(str, EGN_LEN - 4, EGN_LEN));
   EGN = str;
 }
 
@@ -23,7 +24,7 @@ void ID::validateEGN(const MyString& str) const {
 
   // Check if all digits
   for(int i = 0; i < EGN_LEN; i++) {
-    if(isDigit(str[i])) {
+    if(is_digit(str[i])) {
       throw std::invalid_argument("EGN contains non-digit symbols!");
     }
   }
@@ -37,7 +38,7 @@ void ID::validateEGN(const MyString& str) const {
   size_t checkSum = 0;
 
   for(size_t i = 0; i < EGN_LEN - 1; i++) {
-    checkSum += charToInt(str[i]) * specialMultipliers[i];
+    checkSum += char_to_int(str[i]) * specialMultipliers[i];
   }
 
   checkSum -= checkSum/MOD * MOD;
@@ -48,45 +49,16 @@ void ID::validateEGN(const MyString& str) const {
 }
 
 size_t ID::peopleBornBefore() {
-  size_t diff = stringToInt(EGN, EGN_LEN - 4, EGN_LEN) - (int) region;
+  size_t diff = string_to_int(EGN, EGN_LEN - 4, EGN_LEN) - (int) region;
 
   return diff/2; // rounded down
 }
 
 bool ID::isBoy() const {
   // If penultimate number is even it's a boy, otherwise it's a girl
-  return (charToInt(EGN[EGN_LEN - 2]) % 2 == 0);
+  return (char_to_int(EGN[EGN_LEN - 2]) % 2 == 0);
 }
 
 bool ID::isGirl() const {
   return !isBoy();
-}
-
-int charToInt(char c) {
-  if(c >= '0' && c <= '9') {
-    return c & 0xF;
-  }
-
-  return -1;
-}
-
-bool isDigit(char c) {
-  if(c >= '0' && c <= '9') {
-    return true;
-  }
-
-  return false;
-}
-
-size_t stringToInt(const MyString& str, size_t start, size_t end) {
-  size_t num = 0;
-
-  for(size_t i = start; i < end; i++) {
-    if(isDigit(str[i])) {
-      num *= 10;
-      num += charToInt(str[i]);
-    }
-  }
-
-  return num;
 }
