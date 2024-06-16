@@ -12,7 +12,7 @@ const MyString &ID::getEGN() const {
 
 void ID::setEGN(const MyString &str) {
   validateEGN(str);
-  region = getRegion(string_to_int(str, EGN_LEN - 4, EGN_LEN));
+  region = getRegion(stringToInt(str, EGN_LEN - 4, EGN_LEN));
   EGN = str;
 }
 
@@ -24,7 +24,7 @@ void ID::validateEGN(const MyString& str) const {
 
   // Check if all digits
   for(int i = 0; i < EGN_LEN; i++) {
-    if(is_digit(str[i])) {
+    if(isDigit(str[i])) {
       throw std::invalid_argument("EGN contains non-digit symbols!");
     }
   }
@@ -38,7 +38,7 @@ void ID::validateEGN(const MyString& str) const {
   size_t checkSum = 0;
 
   for(size_t i = 0; i < EGN_LEN - 1; i++) {
-    checkSum += char_to_int(str[i]) * specialMultipliers[i];
+    checkSum += charToInt(str[i]) * specialMultipliers[i];
   }
 
   checkSum -= checkSum/MOD * MOD;
@@ -49,14 +49,14 @@ void ID::validateEGN(const MyString& str) const {
 }
 
 size_t ID::peopleBornBefore() {
-  size_t diff = string_to_int(EGN, EGN_LEN - 4, EGN_LEN) - (int) region;
+  size_t diff = stringToInt(EGN, EGN_LEN - 4, EGN_LEN) - (int) region;
 
   return diff/2; // rounded down
 }
 
 bool ID::isBoy() const {
   // If penultimate number is even it's a boy, otherwise it's a girl
-  return (char_to_int(EGN[EGN_LEN - 2]) % 2 == 0);
+  return (charToInt(EGN[EGN_LEN - 2]) % 2 == 0);
 }
 
 bool ID::isGirl() const {

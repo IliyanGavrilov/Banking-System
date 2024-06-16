@@ -58,7 +58,7 @@ public:
 //bool operator>(const MyString& lhs, const MyString& rhs);
 //bool operator>=(const MyString& lhs, const MyString& rhs);
 
-int char_to_int(char c);
-bool is_digit(char c);
-size_t string_to_int(const MyString& str, size_t start, size_t end);
-bool is_alpha(char c);
+int charToInt(char c);
+bool isDigit(char c);
+size_t stringToInt(const MyString& str, size_t start, size_t end);
+bool isAlpha(char c);
