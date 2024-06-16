@@ -22,7 +22,3 @@ public:
   bool isBoy() const;
   bool isGirl() const;
 };
-
-int charToInt(char c);
-bool isDigit(char c);
-size_t stringToInt(const MyString& str, size_t start, size_t end);

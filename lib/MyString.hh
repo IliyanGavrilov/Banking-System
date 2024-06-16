@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream> // size_t, std::move
 
+// MyString allows for implicit conversions using const char *
 class MyString
 {
   char* elems = new char[1] {'\0'};
@@ -56,3 +57,8 @@ public:
 //bool operator<=(const MyString& lhs, const MyString& rhs);
 //bool operator>(const MyString& lhs, const MyString& rhs);
 //bool operator>=(const MyString& lhs, const MyString& rhs);
+
+int char_to_int(char c);
+bool is_digit(char c);
+size_t string_to_int(const MyString& str, size_t start, size_t end);
+bool is_alpha(char c);
