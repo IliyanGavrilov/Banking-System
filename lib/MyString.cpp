@@ -187,7 +187,7 @@ std::ostream& operator<<(std::ostream& os, const MyString& str) {
 //  return result;
 //}
 
-int char_to_int(char c) {
+int charToInt(char c) {
   if(c >= '0' && c <= '9') {
     return c & 0xF;
   }
@@ -195,23 +195,23 @@ int char_to_int(char c) {
   return -1;
 }
 
-bool is_digit(char c) {
+bool isDigit(char c) {
   return (c >= '0' && c <= '9');
 }
 
-size_t string_to_int(const MyString& str, size_t start, size_t end) {
+size_t stringToInt(const MyString& str, size_t start, size_t end) {
   size_t num = 0;
 
   for(size_t i = start; i < end; i++) {
-    if(is_digit(str[i])) {
+    if(isDigit(str[i])) {
       num *= 10;
-      num += char_to_int(str[i]);
+      num += charToInt(str[i]);
     }
   }
 
   return num;
 }
 
-bool is_alpha(char c) {
+bool isAlpha(char c) {
   return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
 }

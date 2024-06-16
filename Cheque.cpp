@@ -12,7 +12,7 @@ Cheque::Cheque(float cashAmount, char *code) {
   }
 
   for(size_t i = 0; i < CODE_LEN; i++) {
-    if(!is_digit(code[i]) && !is_alpha(code[i])) {
+    if(!isDigit(code[i]) && !isAlpha(code[i])) {
       throw std::invalid_argument("Invalid characters found in cheque validation code! Must contain only letters and numbers!");
     }
   }
