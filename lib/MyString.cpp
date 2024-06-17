@@ -212,6 +212,30 @@ size_t stringToInt(const MyString& str, size_t start, size_t end) {
   return num;
 }
 
+bool isLower(char c) {
+  return (c >= 'a' && c <= 'z');
+}
+
+bool isUpper(char c) {
+  return (c >= 'A' && c <= 'Z');
+}
+
 bool isAlpha(char c) {
-  return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
+  return isLower(c) || isUpper(c);
+}
+
+char toLower(char c) {
+  if(isUpper(c)) {
+    return (char) (c | 0x20);
+  }
+
+  return c;
+}
+
+char toUpper(char c) {
+  if(isLower(c)) {
+    return (char) (c & 0xDF);
+  }
+
+  return c;
 }

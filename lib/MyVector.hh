@@ -63,7 +63,7 @@ class MyVector {
   }
 
 public:
-  MyVector()=default;
+  MyVector() = default;
 
   MyVector(const MyVector& other) {
     copyFrom(other);
