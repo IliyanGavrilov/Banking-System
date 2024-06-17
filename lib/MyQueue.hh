@@ -7,7 +7,7 @@ class MyQueue {
   MyVector<T> data={};
 
 public:
-  MyQueue()=default;
+  MyQueue() = default;
 
   void push(const T& obj) {
     data.push_back(obj);

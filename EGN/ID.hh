@@ -5,14 +5,14 @@
 #define MOD 11 // The checkSum number is reduced to mod11 (module 11)
 
 class ID {
-  MyString EGN = "0001010000"; // Default valid EGN
-  IDRegion region = IDRegion::Blagoevgrad;
+  MyString EGN;
+  IDRegion region;
+
+  void setEGN(const MyString &str);
 public:
-  ID()=default;
+  ID() = delete;
   explicit ID(const MyString& str);
 
-  const MyString &getEGN() const;
-  void setEGN(const MyString &str);
   void validateEGN(const MyString &str) const;
 
   // How many people (of same gender) born on the same day in the same region before this person
@@ -21,4 +21,6 @@ public:
   // Is girl or boy
   bool isBoy() const;
   bool isGirl() const;
+
+  friend bool operator==(const ID& id1, const ID& id2);
 };

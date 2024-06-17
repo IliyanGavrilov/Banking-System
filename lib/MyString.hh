@@ -15,7 +15,7 @@ class MyString
   void copyFrom(const MyString& other);
   void moveFrom(MyString&& other) noexcept;
 public:
-  MyString()=default;
+  MyString() = default;
   MyString(const MyString& other);
   MyString(MyString&& other) noexcept;
   MyString(const char *str);
@@ -61,4 +61,8 @@ public:
 int charToInt(char c);
 bool isDigit(char c);
 size_t stringToInt(const MyString& str, size_t start, size_t end);
+bool isLower(char c);
+bool isUpper(char c);
 bool isAlpha(char c);
+char toLower(char c);
+char toUpper(char c);
