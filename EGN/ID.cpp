@@ -1,13 +1,8 @@
 #include "ID.hh"
-#include <cstring>
 #include "../lib/MyString.hh"
 
 ID::ID(const MyString& str) {
   setEGN(str);
-}
-
-const MyString &ID::getEGN() const {
-  return EGN;
 }
 
 void ID::setEGN(const MyString &str) {
@@ -61,4 +56,8 @@ bool ID::isBoy() const {
 
 bool ID::isGirl() const {
   return !isBoy();
+}
+
+bool operator==(const ID& id1, const ID& id2) {
+  return id1.EGN == id2.EGN;
 }

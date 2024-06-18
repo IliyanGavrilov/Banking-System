@@ -18,7 +18,7 @@ public:
   MyString() = default;
   MyString(const MyString& other);
   MyString(MyString&& other) noexcept;
-  MyString(const char *str);
+  MyString(const char *str); // NOT EXPLICIT
   explicit MyString(size_t size);
   ~MyString();
 
