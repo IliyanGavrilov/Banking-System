@@ -1,17 +1,17 @@
 #pragma once
 #include <iostream> // std::move
 
-template <typename T>
+template <class T>
 class MyUniquePointer {
   T *ptr = nullptr;
 
-  void moveFrom(MyUniquePointer&& other) {
-    this->ptr = other.ptr;
-    other.ptr = nullptr;
-  }
-
   void free() {
     delete ptr;
+  }
+
+  void moveFrom(MyUniquePointer&& other) noexcept {
+    this->ptr = other.ptr;
+    other.ptr = nullptr;
   }
 
 public:
@@ -19,7 +19,7 @@ public:
   MyUniquePointer(const MyUniquePointer& other) = delete;
   MyUniquePointer& operator=(const MyUniquePointer& other) = delete;
 
-  MyUniquePointer(T* ptr) {
+  MyUniquePointer(T* ptr) { // NOT EXPLICIT
     this->ptr = ptr;
   }
 
