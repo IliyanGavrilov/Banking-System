@@ -1,5 +1,6 @@
 #include "ID.hh"
 #include "../lib/MyString.hh"
+#include <cstring>
 
 ID::ID(const MyString& str) {
   setEGN(str);
@@ -8,7 +9,7 @@ ID::ID(const MyString& str) {
 void ID::setEGN(const MyString &str) {
   validateEGN(str);
   region = getRegion(stringToInt(str, EGN_LEN - 4, EGN_LEN));
-  EGN = str;
+  strcpy(EGN, str.c_str());
 }
 
 void ID::validateEGN(const MyString& str) const {
@@ -46,7 +47,7 @@ void ID::validateEGN(const MyString& str) const {
 size_t ID::peopleBornBefore() {
   size_t diff = stringToInt(EGN, EGN_LEN - 4, EGN_LEN) - (int) region;
 
-  return diff/2; // rounded down
+  return diff / 2; // rounded down
 }
 
 bool ID::isBoy() const {
@@ -60,4 +61,10 @@ bool ID::isGirl() const {
 
 bool operator==(const ID& id1, const ID& id2) {
   return id1.EGN == id2.EGN;
+}
+
+std::ostream& operator<<(std::ostream& os, const ID& egn) {
+  os << egn.EGN;
+
+  return os;
 }
