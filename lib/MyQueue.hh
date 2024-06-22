@@ -36,4 +36,8 @@ public:
   bool isEmpty() const {
     return data.empty();
   }
+
+  size_t size() const {
+    return data.size();
+  }
 };

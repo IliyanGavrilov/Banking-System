@@ -70,7 +70,6 @@ public:
     return *this;
   }
 
-
   MyWeakPtr& operator=(MyWeakPtr<T>&& other) noexcept {
     if(this != &other) {
       free();
@@ -79,7 +78,6 @@ public:
 
     return *this;
   }
-
 
   MySharedPtr<T> lock() const {
     if(expired()) {

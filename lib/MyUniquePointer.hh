@@ -15,7 +15,7 @@ class MyUniquePointer {
   }
 
 public:
-  MyUniquePointer() = delete;
+  MyUniquePointer() = default;
   MyUniquePointer(const MyUniquePointer& other) = delete;
   MyUniquePointer& operator=(const MyUniquePointer& other) = delete;
 
