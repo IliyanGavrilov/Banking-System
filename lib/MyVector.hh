@@ -216,7 +216,7 @@ public:
     }
 
     for(int i = this->curr - 1; i >= (int) index; i--) {
-      this->elems[i + 1] = this->elems[i];
+      this->elems[i + 1].operator=(std::move(this->elems[i]));// = std::move(this->elems[i]);
     }
 
     this->elems[index] = std::move(elem);
