@@ -5,19 +5,15 @@ Bank::Bank(const MyString& name) {
   this->name = name;
 }
 
-void Bank::addEmployee(const BankEmployee& employee) {
-  this->employees.push_back(employee);
-}
-
 void Bank::addEmployee(BankEmployee&& employee) {
   this->employees.push_back(std::move(employee));
 }
 
-void Bank::addCustomer(const std::shared_ptr<Customer>& customer) {
+void Bank::addCustomer(const MySharedPtr<Customer>& customer) {
   this->customers.push_back(customer);
 }
 
-void Bank::receiveRequest(MyUniquePointer<Request> request) {
+void Bank::receiveRequest(MyUniquePointer<Request>&& request) {
   if(employees.empty()) {
     throw std::logic_error("No employees to assign task to!");
   }
@@ -35,4 +31,8 @@ void Bank::receiveRequest(MyUniquePointer<Request> request) {
   }
 
   employees[minIdx].receiveTask(std::move(request));
+}
+
+const MyString &Bank::getName() const {
+  return name;
 }

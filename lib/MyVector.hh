@@ -1,9 +1,9 @@
 #pragma once
 #include <iostream> // std::move, size_t
 #include <exception>
-#include <limits>
+#include <limits> // max_size()
 
-template<class T>
+template <class T>
 class MyVector {
   T* elems = nullptr;
   size_t curr = 0; // current size
@@ -11,7 +11,7 @@ class MyVector {
 
   void reallocate(size_t size) {
     this->cap = next_pow_of_2(size);
-    T *temp = new T[this->cap] {};
+    T *temp = new T[this->cap];
 
     for(size_t i = 0; i < this->curr; i++) {
       temp[i] = std::move(elems[i]);
@@ -191,7 +191,19 @@ public:
       throw std::out_of_range("MyVector::pop_back(): Vector is empty!");
     }
 
-    for(size_t i = 0; i < curr - 1; i++) {
+    pop(0);
+  }
+
+  void pop(size_t index) {
+    if(index > this->curr) {
+      throw std::out_of_range("MyVector::pop(): Invalid index!");
+    }
+
+    if(this->curr == 0) {
+      throw std::out_of_range("MyVector::pop(): Vector is empty!");
+    }
+
+    for(size_t i = index; i < curr - 1; i++) {
       elems[i] = std::move(elems[i + 1]);
     }
 
@@ -203,7 +215,7 @@ public:
       throw std::out_of_range("MyVector::pop_back(): Vector is empty!");
     }
 
-    this->curr--;
+    curr--;
   }
 
   void insert(size_t index, T &&elem) {
@@ -216,7 +228,7 @@ public:
     }
 
     for(int i = this->curr - 1; i >= (int) index; i--) {
-      this->elems[i + 1].operator=(std::move(this->elems[i]));// = std::move(this->elems[i]);
+      this->elems[i + 1] = (std::move(this->elems[i]));
     }
 
     this->elems[index] = std::move(elem);
@@ -267,7 +279,7 @@ public:
   }
 };
 
-//template<class T>
+//template <class T>
 //bool operator==(const MyVector<T>& lhs, const MyVector<T>& rhs) {
 //  if(lhs.getSize() != rhs.getSize()) {
 //    return false;
@@ -282,12 +294,12 @@ public:
 //  return true;
 //}
 //
-//template<class T>
+//template <class T>
 //bool operator!=(const MyVector<T>& lhs, const MyVector<T>& rhs) {
 //  return !(lhs == rhs);
 //}
 //
-//template<class T>
+//template <class T>
 //void swap(MyVector<T>& lhs, MyVector<T>& rhs) {
 //  MyVector<T> temp(lhs);
 //  lhs = rhs;

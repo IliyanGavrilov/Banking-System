@@ -4,7 +4,7 @@
 
 template <class T>
 class MySharedPtr {
-  friend class WeakPtr;
+  template <class U> friend class MyWeakPtr;
 
   T* data = nullptr;
   Counter* counter = {};
@@ -48,7 +48,7 @@ public:
     counter = nullptr;
   }
 
-  MySharedPtr(T* data) {
+  MySharedPtr(T* data) { // NOT EXPLICIT
     this->data = data;
 
     if(this->data) {
@@ -89,17 +89,20 @@ public:
 
   const T& operator*() const {
     if(data == nullptr) {
-      throw std::runtime_error("Nullptr exception!");
+      throw std::runtime_error("MySharedPtr: Nullptr exception!");
     }
+
     return *data;
   }
 
   T& operator*() {
     if(data == nullptr) {
-      throw std::runtime_error("Pointer not set");
+      throw std::runtime_error("MySharedPtr: Nullptr exception!");
     }
+
     return *data;
   }
+
   const T* operator->() const {
     return data;
   }

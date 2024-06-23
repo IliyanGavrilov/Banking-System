@@ -1,8 +1,8 @@
 #include "Cheque.hh"
 #include "lib/MyString.hh"
-#include <cstring>
+#include <cstring> // strcpy, strlen, strcmp, etc.
 
-Cheque::Cheque(float cashAmount, const MyString& code, const ID &EGN) : EGN(EGN) {
+Cheque::Cheque(int cashAmount, const MyString& code, const MyString &EGN) : EGN(EGN) {
   if(cashAmount <= 0) {
     throw std::out_of_range("Cheque can't have 0 or negative amount of cash in it!");
   }
@@ -21,9 +21,7 @@ Cheque::Cheque(float cashAmount, const MyString& code, const ID &EGN) : EGN(EGN)
   this->cashAmount = cashAmount;
 }
 
-Cheque::Cheque(float cashAmount, const MyString& code, const MyString& EGN) : Cheque(cashAmount, code, ID(EGN)) {}
-
-float Cheque::getCashAmount() const {
+int Cheque::getCashAmount() const {
   return cashAmount;
 }
 
