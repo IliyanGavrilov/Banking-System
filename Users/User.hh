@@ -1,9 +1,12 @@
 #pragma once
 #include "../lib/MyString.hh"
 #include "../lib/MyVector.hh"
+#include "../lib/MyUniquePointer.hh"
 #include "../EGN/ID.hh"
 #include "../Cheque.hh"
 #include "../Messages.hh"
+
+class Command;
 
 class User {
 protected:
@@ -21,4 +24,5 @@ public:
 
   virtual void whoami() const = 0;
   virtual void help() const = 0;
+  virtual MyUniquePointer<Command> getCommand(const MyString& cmdName) const = 0;
 };

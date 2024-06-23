@@ -7,9 +7,10 @@
 #include "../lib/MySharedPtr/MyWeakPtr.hh"
 
 class BankEmployee : public User {
+  static MyVector<MyPair<const MyString, MyUniquePointer<Command>>> commands;
   // Should be a queue, but from the examples the employee accesses tasks by id
   MyVector<MyUniquePointer<Request>> _tasks; // Heterogeneous container
-  MySharedPtr<InformationSystem> system;
+  MySharedPtr<InformationSystem> system = InformationSystem::getInstance();
   size_t taskGivenCnt = 0;
   size_t getTaskIdxById(size_t taskId) const;
 public:
@@ -21,6 +22,8 @@ public:
   BankEmployee& operator=(BankEmployee&& other) = default;
   ~BankEmployee() = default;
 
+  BankEmployee(const MyString& name, const MyString& EGN, uint8_t age);
+
   size_t getTasksCnt() const;
   void receiveTask(MyUniquePointer<Request>&& task);
   void listTasks() const;
@@ -31,4 +34,5 @@ public:
 
   void help() const override;
   void whoami() const override;
+  MyUniquePointer<Command> getCommand(const MyString& cmdName) const override;
 };

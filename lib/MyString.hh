@@ -69,4 +69,5 @@ bool isLower(char c);
 bool isUpper(char c);
 bool isAlpha(char c);
 char toLower(char c);
+MyString toLower(const MyString& str);
 char toUpper(char c);

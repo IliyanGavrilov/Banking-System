@@ -9,7 +9,7 @@ void Messages::receive(MyString&& message) {
   messages.push_back(std::move(message));
 }
 
-void Messages::list() {
+void Messages::list() const {
   for(size_t i = 0; i < messages.size(); i++) {
     std::cout << "[" << i + 1 << "] - " << messages[i] << "\n";
   }

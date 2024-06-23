@@ -1,4 +1,10 @@
 #include "BankEmployee.hh"
+#include "../Commands/TasksCmd.hh"
+
+MyVector<MyPair<const MyString, MyUniquePointer<Command>>> BankEmployee::commands = {};
+        //{MyPair<const MyString, MyUniquePointer<Command>>("a", new TasksCmd(*this)),}; TODO
+
+BankEmployee::BankEmployee(const MyString& name, const MyString& EGN, uint8_t age) : User(name, EGN, age) {}
 
 size_t BankEmployee::getTaskIdxById(size_t taskId) const {
   for(size_t i = 0; i < _tasks.size();i++) {
@@ -61,4 +67,8 @@ void BankEmployee::help() const {
 void BankEmployee::whoami() const {
   User::whoami();
   std::cout << "(Bank Employee)!\n";
+}
+
+MyUniquePointer<Command> BankEmployee::getCommand(const MyString &cmdName) const {
+  return MyUniquePointer<Command>();
 }

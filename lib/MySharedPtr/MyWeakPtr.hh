@@ -79,6 +79,10 @@ public:
     return *this;
   }
 
+  explicit operator bool() const {
+    return data;
+  }
+
   MySharedPtr<T> lock() const {
     if(expired()) {
       return MySharedPtr<T>();

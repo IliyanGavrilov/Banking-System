@@ -253,6 +253,16 @@ char toLower(char c) {
   return c;
 }
 
+MyString toLower(const MyString& str) {
+  MyString result(str);
+
+  for(size_t i = 0; i < str.length(); i++) {
+    result.data()[i] = toLower(str[i]);
+  }
+
+  return result;
+}
+
 char toUpper(char c) {
   if(isLower(c)) {
     return (char) (c & 0xDF);
