@@ -9,7 +9,3 @@ Cheque ExternalEmployee::sendCheque(int sum, const MyString& code, const MyStrin
 void ExternalEmployee::help() const {
 
 }
-
-User* ExternalEmployee::clone() const {
-  return new ExternalEmployee(*this);
-}

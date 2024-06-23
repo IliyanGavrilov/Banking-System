@@ -3,12 +3,13 @@
 #include "Requests/Request.hh"
 #include <ctime>
 
-void InformationSystem::addBank(const Bank& bank) {
-  banks.push_back(new Bank(bank));
-}
+InformationSystem* InformationSystem::instance = nullptr;
 
-void InformationSystem::addUser(const User& user) {
-  users.push_back(user.clone());
+InformationSystem* InformationSystem::getInstance() {
+  if (!instance) {
+    instance = new InformationSystem();
+  }
+  return instance;
 }
 
 void InformationSystem::addBank(MyUniquePointer<Bank>&& bank) {

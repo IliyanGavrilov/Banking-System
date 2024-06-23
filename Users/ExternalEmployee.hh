@@ -9,5 +9,4 @@ public:
   Cheque sendCheque(int sum, const MyString& code, const MyString& egn);
 
   void help() const override;
-  User* clone() const override;
 };
