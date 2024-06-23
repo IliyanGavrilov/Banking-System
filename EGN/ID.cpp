@@ -1,6 +1,6 @@
 #include "ID.hh"
 #include "../lib/MyString.hh"
-#include <cstring>
+#include <cstring> // strcpy, strlen, strcmp, etc.
 
 ID::ID(const MyString& str) {
   setEGN(str);
@@ -39,7 +39,7 @@ void ID::validateEGN(const MyString& str) const {
 
   checkSum -= checkSum/MOD * MOD;
 
-  if(str[EGN_LEN - 1] != checkSum) {
+  if((size_t) str[EGN_LEN - 1] != checkSum) {
     throw std::invalid_argument ("EGN checkSum verification failed!");
   }
 }
@@ -67,4 +67,8 @@ std::ostream& operator<<(std::ostream& os, const ID& egn) {
   os << egn.EGN;
 
   return os;
+}
+
+const char *ID::getEGN() const {
+  return EGN;
 }

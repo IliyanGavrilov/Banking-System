@@ -3,15 +3,15 @@
 
 template <class T>
 class MyUniquePointer {
-  T *ptr = nullptr;
+  T *data = nullptr;
 
   void free() {
-    delete ptr;
+    delete data;
   }
 
   void moveFrom(MyUniquePointer&& other) noexcept {
-    this->ptr = other.ptr;
-    other.ptr = nullptr;
+    this->data = other.data;
+    other.data = nullptr;
   }
 
 public:
@@ -19,8 +19,8 @@ public:
   MyUniquePointer(const MyUniquePointer& other) = delete;
   MyUniquePointer& operator=(const MyUniquePointer& other) = delete;
 
-  MyUniquePointer(T* ptr) { // NOT EXPLICIT
-    this->ptr = ptr;
+  MyUniquePointer(T* data) { // NOT EXPLICIT
+    this->data = data;
   }
 
   MyUniquePointer(MyUniquePointer&& other) noexcept {
@@ -40,10 +40,30 @@ public:
   }
 
   T& operator*() {
-    return *ptr;
+    if(data == nullptr) {
+      throw std::runtime_error("MySharedPtr: Nullptr exception!");
+    }
+
+    return *data;
   }
 
   const T& operator*() const {
-    return *ptr;
+    if(data == nullptr) {
+      throw std::runtime_error("MySharedPtr: Nullptr exception!");
+    }
+
+    return *data;
+  }
+
+  const T* operator->() const {
+    return data;
+  }
+
+  T* operator->() {
+    return data;
+  }
+
+  bool isInitialized() const {
+    return data != nullptr;
   }
 };

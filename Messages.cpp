@@ -1,5 +1,5 @@
 #include "Messages.hh"
-#include <iostream>
+#include <iostream> // cout
 
 void Messages::receive(const MyString& message) {
   messages.push_back(message);

@@ -1,6 +1,6 @@
 #include "MyString.hh"
 #include <cstring> // For strlen, strcpy, strcmp, etc.
-#include <limits>
+#include <limits> // max_size()
 
 void MyString::reallocate(size_t size) {
   this->cap = next_pow_of_2(size);
@@ -164,28 +164,30 @@ std::ostream& operator<<(std::ostream& os, const MyString& str) {
 //  return this->operator+=(MyString(str));
 //}
 //
-//MyString& MyString::operator+=(const MyString &other) {
-//    if(length() + other.length() > cap) {
-//      cap = next_pow_of_2(length() + other.length() + 1);
-//      reallocate(strlen(elems) + 1);
-//    }
-//
-//    size_t curr = strlen(elems) + 1;
-//    size_t other_curr = strlen(other.elems) + 1;
-//
-//    for(size_t i = curr; i <= curr + other_curr; i++) {
-//      elems[i] = other.elems[i - curr];
-//    }
-//}
-//
-//MyString operator+(const MyString& lhs, const MyString& rhs) {
-//  MyString result(lhs.length() + rhs.length());
-//
-//  result += lhs;
-//  result += rhs;
-//
-//  return result;
-//}
+MyString& MyString::operator+=(const MyString &other) {
+    if(length() + other.length() > cap) {
+      cap = next_pow_of_2(length() + other.length() + 1);
+      reallocate(strlen(elems) + 1);
+    }
+
+    size_t curr = strlen(elems) + 1;
+    size_t other_curr = strlen(other.elems) + 1;
+
+    for(size_t i = curr; i <= curr + other_curr; i++) {
+      elems[i] = other.elems[i - curr];
+    }
+
+    return *this;
+}
+
+MyString operator+(const MyString& lhs, const MyString& rhs) {
+  MyString result(lhs.length() + rhs.length());
+
+  result += lhs;
+  result += rhs;
+
+  return result;
+}
 
 int charToInt(char c) {
   if(c >= '0' && c <= '9') {
@@ -210,6 +212,25 @@ size_t stringToInt(const MyString& str, size_t start, size_t end) {
   }
 
   return num;
+}
+
+void getDigits(MyVector<uint8_t>& digits, size_t num) {
+  if(num >= BASE) {
+    getDigits(digits, num / BASE);
+  }
+  digits.push_back(num % BASE);
+}
+
+MyString uintToString(size_t num) {
+  MyVector<uint8_t> digits;
+  getDigits(digits, num);
+
+  MyString result;
+  for(size_t i = 0; i < digits.size(); i++) {
+    result += MyString(digits[i]);
+  }
+
+  return result;
 }
 
 bool isLower(char c) {
