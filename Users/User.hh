@@ -19,6 +19,6 @@ public:
 
   const MyString &getName() const;
 
-  void whoami();
+  virtual void whoami() const = 0;
   virtual void help() const = 0;
 };

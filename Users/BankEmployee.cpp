@@ -50,5 +50,15 @@ void BankEmployee::validate(size_t taskId) const {
 }
 
 void BankEmployee::help() const {
+  User::help();
+  std::cout << "tasks - Lists all your undone tasks, along with a short description.\n";
+  std::cout << "view [task_id] - Shows full detailed description regarding a given task.\n";
+  std::cout << "approve [task_id] - Approve and finish task.\n";
+  std::cout << "disapprove [task_id] - Disapprove and finish task.\n";
+  std::cout << "validate [task_id] - Sends request to old bank for validation whether the user has inputted correct data.\n";
+}
 
+void BankEmployee::whoami() const {
+  User::whoami();
+  std::cout << "(Bank Employee)!\n";
 }

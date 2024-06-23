@@ -21,8 +21,14 @@ User::User(const MyString& name, const ID& EGN, uint8_t age) : EGN(EGN) {
   this->age = age;
 }
 
-void User::whoami() {
-  std::cout << "You are " << name << "!\n";
+void User::help() const {
+  std::cout << "Your commands:\n";
+  std::cout << "exit - leave current profile.\n";
+  std::cout << "whoami - Show full information about current profile.\n";
+}
+
+void User::whoami() const {
+  std::cout << "You are " << name;
 }
 
 const MyString &User::getName() const {

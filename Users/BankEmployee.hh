@@ -30,4 +30,5 @@ public:
   void validate(size_t taskId) const;
 
   void help() const override;
+  void whoami() const override;
 };
