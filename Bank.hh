@@ -25,6 +25,6 @@ public:
   const MyString &getName() const;
 
   void addEmployee(BankEmployee&& employee);
-  void addCustomer(const MySharedPtr<Customer>& customer);
+  void addCustomer(const MySharedPtr<Customer>& customer); // [[maybe_unused]]
   void receiveRequest(MyUniquePointer<Request>&& request);
 };

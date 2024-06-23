@@ -2,8 +2,9 @@
 #include <exception>
 #include "../Requests/OpenRequest.hh"
 #include "../Requests/CloseRequest.hh"
+#include "../Requests/ChangeRequest.hh"
 
-size_t Customer::counter = 0;
+Customer::Customer(const MyString& name, const MyString& EGN, uint8_t age) : User(name, EGN, age) {}
 
 int Customer::checkBalance(const MyString& bankName, size_t accountNumber) const {
   for(size_t i = 0; i < accounts.size(); i++) {
@@ -17,6 +18,18 @@ int Customer::checkBalance(const MyString& bankName, size_t accountNumber) const
 
 void Customer::open(const MyString& bankName) {
   system->receiveRequest(new OpenRequest(this, bankName), bankName);
+}
+
+void Customer::close(const MyString &bankName, size_t accountNumber) {
+  system->receiveRequest(new CloseRequest(this, accountNumber, bankName), bankName);
+}
+
+void Customer::redeem(const MyString &bankName, size_t accountNumber, const MyString &verification_code) {
+  system->redeemCheque(this->EGN, bankName, accountNumber, verification_code);
+}
+
+void Customer::change(const MyString &newBankName, const MyString &currBankName, size_t accountNumber) {
+  //system->receiveRequest(new ChangeRequest(this, currBankName, ))
 }
 
 void Customer::addAccount(const MyString& bankName, const BankAccount& acc) {
@@ -37,6 +50,19 @@ MyString Customer::toString() const {
          MyString("Age: ") + MyString(uintToString(age)) + MyString("\n") ;
 }
 
+void Customer::list(const MyString &bankName) const {
+  for(size_t i = 0; i < accounts.size(); i++) {
+    if(accounts[i].first() == bankName) {
+      std::cout << "*" << accounts[i].second().getId() << "\n";
+    }
+  }
+}
+
+void Customer::messages() const {
+  mail.list();
+}
+
+
 void Customer::help() const {
   User::help();
   std::cout << "check_avl [bank_name] [account_number] - Check balance for given account.\n";
@@ -52,4 +78,8 @@ void Customer::help() const {
 void Customer::whoami() const {
   User::whoami();
   std::cout << "(Customer)!\n";
+}
+
+MyUniquePointer<Command> Customer::getCommand(const MyString &cmdName) const {
+  return MyUniquePointer<Command>();
 }

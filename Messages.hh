@@ -7,5 +7,5 @@ class Messages {
 public:
   void receive(const MyString& message);
   void receive(MyString&& message);
-  void list();
+  void list() const;
 };

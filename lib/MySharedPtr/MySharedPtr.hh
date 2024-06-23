@@ -111,6 +111,10 @@ public:
     return data;
   }
 
+  explicit operator bool() const {
+    return data;
+  }
+
   bool isInitialized() const {
     return data != nullptr;
   }
