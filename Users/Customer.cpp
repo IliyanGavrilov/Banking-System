@@ -38,5 +38,18 @@ MyString Customer::toString() const {
 }
 
 void Customer::help() const {
+  User::help();
+  std::cout << "check_avl [bank_name] [account_number] - Check balance for given account.\n";
+  std::cout << "open [bank_name] - Send request to open new account in given bank.\n";
+  std::cout << "close [bank_name] [account_number] - Send request to close given account in bank.\n";
+  std::cout << "redeem [bank_name] [account_number] [verification_code] - Redeem cheque in your name.\n";
+  std::cout << "change [new_bank_name] [current_bank_name] [account_number] - " <<
+               "Send request to move given account from one bank to another.\n";
+  std::cout << "list [bank_name] - Lists all your accounts in a given bank.\n";
+  std::cout << "messages - Shows all received messages in chronological order.\n";
+}
 
+void Customer::whoami() const {
+  User::whoami();
+  std::cout << "(Customer)!\n";
 }

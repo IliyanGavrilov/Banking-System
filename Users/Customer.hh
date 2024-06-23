@@ -34,4 +34,5 @@ public:
   MyString toString() const; // Different from "whoami" judging by the examples
 
   void help() const override;
+  void whoami() const override;
 };

@@ -7,5 +7,11 @@ Cheque ExternalEmployee::sendCheque(int sum, const MyString& code, const MyStrin
 }
 
 void ExternalEmployee::help() const {
+  User::help();
+  std::cout << "send_check [sum] [verification_code] [egn] - Creates cheque for user with given EGN.\n";
+}
 
+void ExternalEmployee::whoami() const {
+  User::whoami();
+  std::cout << "(External Company Employee)!\n";
 }
