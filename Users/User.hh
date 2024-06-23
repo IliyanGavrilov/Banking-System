@@ -21,5 +21,4 @@ public:
 
   void whoami();
   virtual void help() const = 0;
-  virtual User* clone() const = 0;
 };

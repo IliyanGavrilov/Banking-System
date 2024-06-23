@@ -12,6 +12,14 @@ class Bank {
   MyVector<MySharedPtr<Customer>> customers = {}; // Hold customers so we can verify close and change requests
 
 public:
+  // BIG 6, no copying because of BankEmployee
+  Bank() = default; // So it can be in vector
+  Bank(const Bank& other) = delete;
+  Bank(Bank&& other) = default;
+  Bank& operator=(const Bank& other) = delete;
+  Bank& operator=(Bank&& other) = default;
+  ~Bank() = default;
+
   explicit Bank(const MyString& name);
 
   const MyString &getName() const;

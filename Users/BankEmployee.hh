@@ -13,7 +13,14 @@ class BankEmployee : public User {
   size_t taskGivenCnt = 0;
   size_t getTaskIdxById(size_t taskId) const;
 public:
+  // BIG 6 by disabling copying, only moving
   BankEmployee() = default; // So it can be in vector
+  BankEmployee(const BankEmployee& other) = delete;
+  BankEmployee(BankEmployee&& other) = default;
+  BankEmployee& operator=(const BankEmployee& other) = delete;
+  BankEmployee& operator=(BankEmployee&& other) = default;
+  ~BankEmployee() = default;
+
   size_t getTasksCnt() const;
   void receiveTask(MyUniquePointer<Request>&& task);
   void listTasks() const;
@@ -23,5 +30,4 @@ public:
   void validate(size_t taskId) const;
 
   void help() const override;
-  User* clone() const override;
 };

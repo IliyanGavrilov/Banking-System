@@ -40,7 +40,3 @@ MyString Customer::toString() const {
 void Customer::help() const {
 
 }
-
-User* Customer::clone() const {
-  return new Customer(*this);
-}

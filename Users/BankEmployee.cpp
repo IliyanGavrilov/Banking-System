@@ -52,7 +52,3 @@ void BankEmployee::validate(size_t taskId) const {
 void BankEmployee::help() const {
 
 }
-
-User* BankEmployee::clone() const {
-  return new BankEmployee(*this);
-}
